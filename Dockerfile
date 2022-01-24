@@ -1,17 +1,15 @@
-FROM ubuntu
+FROM nginx
 
 RUN mkdir -p /app
 WORKDIR /app
 COPY . /app
 
-RUN apt-get update
+RUN rm /etc/nginx/conf.d/default.conf
 
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install nginx php php-fpm -y
+ADD nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY index.php /var/www/html/
 
 EXPOSE 80
 
-CMD ["nginx","-g","daemon off;"]
+CMD ["nginx"]
 
