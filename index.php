@@ -1,3 +1,7 @@
+<?php 
+print_r($_SERVER);
+?>
+
 hello world
 
 Fetching From Django : 
